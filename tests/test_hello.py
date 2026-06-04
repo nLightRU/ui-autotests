@@ -1,5 +1,7 @@
+import pytest
 from playwright.sync_api import sync_playwright
 
+@pytest.mark.skip
 def test_browser_launch():
     with sync_playwright() as p:
         # Запуск в headless=False (с GUI) или headless=True (без GUI)

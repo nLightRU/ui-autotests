@@ -6,7 +6,7 @@ authors = [
     {name = "nLightRU",email = "northenlight6899@gmail.com"}
 ]
 license = "MIT"
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 dependencies = [
     "pytest (>=9.0.3,<10.0.0)",
     "playwright (>=1.60.0,<2.0.0)",
