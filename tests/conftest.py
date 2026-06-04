@@ -1,1 +1,3 @@
-from tests.fixtures import *
+from tests.fixtures.data import *
+
+from tests.fixtures.pages.login_page import login_page

@@ -31,10 +31,16 @@ class LoginPage:
     def click_login(self):
         self.login_button.click()
 
-    @allure.step("Проверяем наличие сообщения об ошибке")
+    @allure.step("Проверить наличие сообщения об ошибке")
     def check_error_message_visible(self):
         expect(self.error_message_container).to_be_visible()
 
-    @allure.step("Проверяем успешный логин")
+    @allure.step("Проверить успешный логин")
     def check_susscess_login(self):
         expect(self._page.get_by_text('Products')).to_be_visible()
+
+    @allure.step('Проверить сообщение об ошибке')
+    def check_error_message_text(self, text: str=None):
+        if not text:
+            raise ValueError(f'No text to check in {self.__qualname__}')
+        expect(self.error_message_container).to_have_text(text)
