@@ -1,23 +1,15 @@
-import os
-from dotenv import load_dotenv
 import allure
 from playwright.sync_api import Page, expect
 
-load_dotenv()
+from pages.base_page import BasePage
 
-class LoginPage:
-    def __init__(self, page: Page):
-        self._page = page
-        self.url = os.getenv('BASE_URL')
+class LoginPage(BasePage):
+    def __init__(self, url:str=None, page: Page=None):
+        super().__init__(url, page)
         self.login_button = self._page.get_by_role('button')
         self.username_input = self._page.locator('#user-name')
         self.password_input = self._page.locator('#password')
         self.error_message_container = self._page.locator(".error-message-container")
-
-    @allure.step('Переходим на страницу')
-    def open_page(self):
-        """Переходим на URL для данной страницы"""
-        self._page.goto(self.url)
 
     @allure.step('Заполнить поле "username"')
     def fill_username(self, text: str = None):
