@@ -15,3 +15,9 @@ def test_back_to_products(empty_cart):
     empty_cart.open_page()
     empty_cart.click_continue_shopping_button()
     empty_cart.check_go_to_products()
+
+@allure.feature('Cart')
+@allure.title('Товары отображаются в корзине')
+def test_cart_with_one_product(cart_with_one_product):
+    cart_with_one_product.open_page()
+    sleep(5)
