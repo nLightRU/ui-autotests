@@ -47,7 +47,7 @@ class ProductsPage(BasePage):
         expect(product_name).to_have_css('color', 'rgb(61, 220, 145)')
 
     @allure.step('Кликнуть на название товара')
-    def open_product_page(self, product_num: int = None):
+    def click_product_name(self, product_num: int = None):
         product = self.get_product_card(product_num)
         product.locator('.inventory_item_name ').click()
         url = self._page.url
@@ -61,7 +61,7 @@ class ProductsPage(BasePage):
         add_to_cart_button.click()
 
     @allure.step('Проверить, что кнопка стала Remove')
-    def check_product_button_is_remove(self, products_num: int = None):
+    def check_product_button_is_remove(self, product_num: int = None):
         product = self.get_product_card(product_num)
         button = product.get_by_role('button')
         expect(button).to_have_text('Remove')

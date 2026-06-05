@@ -74,12 +74,19 @@ def test_products_cart_open(products_page, product_num:int):
     name = products_page.get_product_name(product_num)
     description = products_page.get_product_description(product_num)
 
-    card = products_page.open_product_page(product_num)
+    card = products_page.click_product_name(product_num)
     card.check_name(name)
     card.check_description(description)
 
 
 @allure.feature('Products')
-@allure.title('При открытии карточки товара в корзине кнопка остаётся Remove')
-def test_product_button_is_changing(products_page):
-    product_num = 1
+@allure.title('При открытии карточки добавленного товара кнопка Remove')
+@pytest.mark.parametrize('product_num', [1, 4])
+def test_product_button_is_changing(products_page, product_num:int):
+    products_page.open_page()
+    products_page.click_product_button(product_num)
+    products_page.check_product_button_is_remove(product_num)
+
+    card = products_page.click_product_name(product_num)
+
+    card.check_button_is_remove()

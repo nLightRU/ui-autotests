@@ -30,4 +30,3 @@ def test_go_to_checkout(cart_with_one_product):
     cart_with_one_product.open_page()
     cart_with_one_product.click_checkout_button()
     cart_with_one_product.check_go_to_checkout()
-    sleep(5)
