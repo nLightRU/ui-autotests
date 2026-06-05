@@ -1,7 +1,17 @@
+from time import sleep
 import allure
-import pytest
 
 @allure.feature('Cart')
-def test_page_open(cart_page):
-    cart_page.open_page()
-    cart_page.page_is_opened()
+@allure.title('Страница открывается')
+def test_page_open(empty_cart):
+    empty_cart.open_page()
+    empty_cart.page_is_opened()
+    sleep(5)
+
+
+@allure.feature('Cart')
+@allure.title('Переход на страницу Products')
+def test_back_to_products(empty_cart):
+    empty_cart.open_page()
+    empty_cart.click_continue_shopping_button()
+    empty_cart.check_go_to_products()
