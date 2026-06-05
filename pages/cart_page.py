@@ -6,7 +6,7 @@ class CartPage(BasePage):
     def __init__(self, url: str=None, page: Page=None):
         super().__init__(url, page)
         self.title = self._page.locator('.title')
-        self.checkout_button = self._page.locator('.checkout-button')
+        self.checkout_button = self._page.locator('#checkout')
         self.continue_shopping_button = self._page.locator('#continue-shopping')
         self.cart_items = self._page.locator('.cart_item')
 
@@ -22,6 +22,10 @@ class CartPage(BasePage):
     def click_checkout_button(self):
         self.checkout_button.click()
 
+    @allure.step('Проверка перехода на страницу Checkout Information')
+    def check_go_to_checkout(self):
+        expect(self._page.locator('.title')).to_have_text('Checkout: Your Information')
+
     @allure.step('Кликнуть по кнопке Continue Shopping')
     def click_continue_shopping_button(self):
         self.continue_shopping_button.click()
@@ -36,3 +40,10 @@ class CartPage(BasePage):
             raise ValueError('product_num is required')
         products = self.cart_items.all()[product_num]
         expect(products.get_by_role('button')).to_have_text('Remove')
+
+    @allure.step('Отображается товар в корзине')
+    def cart_item_is_visible(self, product_num: int = None):
+        if not product_num:
+            raise ValueError('product_num is required')
+        product = self.cart_items.all()[product_num-1]
+        expect(product).to_be_visible()
